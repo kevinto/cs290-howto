@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Parsing a CSV file</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="blog-header">
+      <h1 class="blog-title">Section 3: Parsing a CSV file</h1>
+    </div>
+    <div class="blog-post">
+      <h2 class="blog-post-title">How to iterate through values of a CSV file</h2>
+      <p>The previous page showed you how to get and save data from the Yahoo API. In this step, you will learn how to iterate through the data contained within a CSV file. The sample code for how to do this:</p>
+      <pre>
+        <code>
+          $row = 1;
+          if (($handle = fopen("quotes.csv", "r")) !== FALSE) {
+              while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                  $num = count($data);
+                  echo "&lt;p&gt; $num fields in line $row: &lt;br/&gt;&lt;/p&gt;\n";
+                  $row++;
+                  for ($c=0; $c < $num; $c++) {
+                      echo $data[$c] . "&lt;br/&gt;\n";
+                  }
+              }
+              fclose($handle);
+          }
+        </code>
+      </pre>
+    </div>
+    <nav>
+      <ul class="pager">
+        <li>
+          <a href="page2.html">Previous</a>
+        </li>
+        <li>
+          <a href="page4.html">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</body>
+</html>

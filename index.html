@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>How to integrate the Yahoo Stock API with PHP</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="blog-header">
+      <h1 class="blog-title">How-To for using the Yahoo Stock API with PHP</h1>
+      <p class="lead blog-description">by Kevin To</p>
+    </div>
+    <div class="blog-post">
+      <h2 class="blog-post-title">Background information on the Yahoo Stock API</h2>
+      <h4>What is the Yahoo Stock API?</h4>
+      <p>This API lets you get stock information from Yahoo. The information can be retrived through <a href="http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods">GET</a> calls. </p>
+      <h4>Can I get multiple return data types from this API?</h4>
+      <p>Yes, you can get multiple return types. The return formats are CSV, XML, and JSON. This How-To guide will primarily be for using the CSV file format. The request signature for the CSV file format can be found <a href="https://code.google.com/p/yahoo-finance-managed/wiki/CSVAPI">here</a>. The request signature for the XML and JSON can be found <a href="https://code.google.com/p/yahoo-finance-managed/wiki/YQLAPI">here</a>.</p>
+      <h4>How many times can you call this API?</h4>
+      <p>From my testing, it seems that you can call this API an unlimited number of times. The drawback is that this API does not allow you to get information for all of the stocks at the same time.</p>
+      <h4>How many servers are available for this API?</h4>
+      <p>Currently only the North American server is available to use. This means that if you use this API for a website, you need back up sources for your stock requests. Otherwise, if Yahoo's API goes down, your website will have to operate with old information.</p>
+      <h4>What kind information can you get from this stock API?</h4>
+      <p>You can get <a href="https://code.google.com/p/yahoo-finance-managed/wiki/csvQuotesDownload">stock quotes</a>, <a href="https://code.google.com/p/yahoo-finance-managed/wiki/csvHistQuotesDownload">historial quotes</a>, and <a href="https://code.google.com/p/yahoo-finance-managed/wiki/csvSectorDownload">sector</a>/<a href="https://code.google.com/p/yahoo-finance-managed/wiki/csvIndustryDownload">industry</a>/<a href="https://code.google.com/p/yahoo-finance-managed/wiki/csvCompanyDownload">company</a> information. This guide will mainly be focusing on stock quotes.</p>
+    </div>
+    <nav>
+      <ul class="pager">
+        <li>
+          <a href="page1.html">Step 1: System Setup</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</body>
+</html>
