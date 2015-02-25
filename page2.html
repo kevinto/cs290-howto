@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <title>Getting information from the Yahoo API</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/prettify.css" rel="stylesheet">
+  <script src="js/prettify.js"></script>
 </head>
-<body>
+<body onload="prettyPrint()">
   <div class="container">
     <div class="blog-header">
       <h1 class="blog-title">Section 2: Getting a simple quote from the API</h1>
@@ -14,12 +16,10 @@
       <h2 class="blog-post-title">Retrieving data through CSV</h2>
       <h4>Using the GET call to get data from the API</h4>
       <p>In this step, you will be getting the stock quote for GOOGLE and saving it to a CSV file. The sample PHP code for doing this is below: </p>
-      <pre>
-        <code>
-          $filename = "quotes.csv";
-          $downloadFile = file_get_contents("http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=nsl1&e=.csv");
-          file_put_contents($filename, $downloadFile);
-        </code>
+      <pre class="prettyprint linenums">
+        $filename = "quotes.csv";
+        $downloadFile = file_get_contents("http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=nsl1&e=.csv");
+        file_put_contents($filename, $downloadFile);
       </pre>
       <p>The code snippit above is getting the stock name, stock symbol, and latest price for GOOGLE. Then it stores it in the "quotes.csv" file. The file_get_contents() method gets the string from the API call. The file_put_contents() method stores the string in the specified file (it will create the file if it does not exist). If we open the "quotes.csv" file in Microsoft Notepad, you will see this:</p>
       <figure>
