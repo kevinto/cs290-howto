@@ -15,7 +15,6 @@
     <div class="row">
       <div class="col-sm-8 blog-main">
         <div class="blog-post">
-          <h2 class="blog-post-title"></h2>
           <p>
            There are multiple approaches to integrating this API into your PHP project. I will go through a couple of them with you.  
           </p>
@@ -42,16 +41,16 @@
             }
           </pre>
           <p>
-            You can go back to the corresponding sections to get a more detailed analysis of what each line of code does. Taken as a whole, this code accesses the API during the page rendering process and then parses and displays the values received. This method is relatively simple, but it is unmaintainable if your project is bigger than 1 page. The drawbacks of using this method are: </br>
-            <ol>
-              <li>
-                If you need to call the Yahoo API on multiple pages, then you would have to write duplicate code.
-              </li>
-              <li>
-                Requiring the Yahoo API to be accessed during page load makes this a synchronous process. This means that we have to wait for Yahoo to respond before we can load the page.
-              </li>
-            </ol>
+            You can go back to the corresponding sections to get a more detailed analysis of what each line of code does. Taken as a whole, this code accesses the API during the page rendering process and then parses and displays the values received. This method is relatively simple, but it is unmaintainable if your project is bigger than 1 page. The drawbacks of using this method are:
           </p>
+          <ol>
+            <li>
+              If you need to call the Yahoo API on multiple pages, then you would have to write duplicate code.
+            </li>
+            <li>
+              Requiring the Yahoo API to be accessed during page load makes this a synchronous process. This means that we have to wait for Yahoo to respond before we can load the page.
+            </li>
+          </ol>
           <h4>Second Method: A better way...</h4>
           <p>
             This second method makes the Yahoo API call in an asynchronous manner. This decouples the loading of the page from the Yahoo request. The following are code snippets that should go into three separate files: 
