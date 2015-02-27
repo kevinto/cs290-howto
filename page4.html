@@ -10,62 +10,80 @@
     <div class="blog-header">
       <h1 class="blog-title">Section 4: An In-depth look at the API URL Address</h1>
     </div>
-    <div class="blog-post">
-      <h2 class="blog-post-title">
-        How to get different stocks or stock properties from the Yahoo API
-      </h2>
-      <p>
-        Remember in <a href="page2.html">section 2</a> when we executed a GET call with the URL: (http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&amp;f=nsl1&amp;e=.csv) ?
-      </p>
-      <p>
-        This was actually a call to Yahoo's North American servers to get us the specifed data.
-      </p>
-      <h4>Breakdown of the URL: </h4>
-      <p>
-        The <b>first parameter</b> in the GET call is designated as "s". This parameter lets you designate which stocks you want to get information for by inputting the stock symbol. You can designate multiple stocks by using a comma.
-      </p>
-      <h5>
-        Example 1:
-      </h5>
-      <p>
-        s=GOOG
-      </p>
-      <p>
-        This specifies that you want information for 1 stock. Here, "GOOG" stands for google.
-      </p>
-      <h5>
-        Example 2:
-      </h5>
-      <p>
-        s=GOOG,YHOO
-      </p>
-      <p>
-        This specifies that you want information for 2 stocks. Here, "GOOG" stands for Google and "YHOO" stands for Yahoo.
-      </p>
-      <p>
-        The <b>second parameter</b> in the GET call is designated as "f". This parameter lets you designate which proporties to get for the specified stock. A full property list can be found <a href="https://code.google.com/p/yahoo-finance-managed/wiki/enumQuoteProperty">here</a>. The properties are not delimited by any character. You can add properties in any order.
-      </p>
-      <h5>
-        Example 3:
-      </h5>
-      <p>
-        f=nsl1
-      </p>
-      <p>
-        The property order in this example is stock name(s), stock symbol(s), latest quote of the stock(l1). Notice here that stock name and stock symbol are designated with "n" and "s", not "n0" and "s0". When you designate a property without using a number as the second character, then API will get the property that corresponds to the lowest integer of that letter. For instance, you input "x" into the properties paramater. The API will return the stock exchange of the stock; this is because the API will look for "x0".
-      </p>
-      <h5>
-        Example 4:
-      </h5>
-      <p>
-        f=abb4g3
-      </p>
-      <p>
-        The property order in this example is ask price(a), bid price(b), book value per share(b4), and annualized gain(g3). This shows the property separation more clearly: f=[a][b][b4][g3]. Notice, again that "a" and "b" is interpreted as "a0" and "b0"
-      </p>
-      <p>
-        The <b>third parameter</b> in the GET call is designated as "e". This property is constant. By keeping this property set to ".csv", we are getting a csv formatted string every time we call this API.
-      </p>
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <div class="blog-post">
+          <h2 class="blog-post-title">
+            How to get different stocks or stock properties from the Yahoo API
+          </h2>
+          <p>
+            Remember in <a href="page2.html">section 2</a> when we executed a GET call with the URL: (http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&amp;f=nsl1&amp;e=.csv) ?
+          </p>
+          <p>
+            This was actually a call to Yahoo's North American servers to get us the specifed data.
+          </p>
+          <h4>Breakdown of the URL: </h4>
+          <p>
+            The <b>first parameter</b> in the GET call is designated as "s". This parameter lets you designate which stocks you want to get information for by inputting the stock symbol. You can designate multiple stocks by using a comma.
+          </p>
+          <h5>
+            Example 1:
+          </h5>
+          <p>
+            s=GOOG
+          </p>
+          <p>
+            This specifies that you want information for 1 stock. Here, "GOOG" stands for google.
+          </p>
+          <h5>
+            Example 2:
+          </h5>
+          <p>
+            s=GOOG,YHOO
+          </p>
+          <p>
+            This specifies that you want information for 2 stocks. Here, "GOOG" stands for Google and "YHOO" stands for Yahoo.
+          </p>
+          <p>
+            The <b>second parameter</b> in the GET call is designated as "f". This parameter lets you designate which proporties to get for the specified stock. A full property list can be found <a href="https://code.google.com/p/yahoo-finance-managed/wiki/enumQuoteProperty">here</a>. The properties are not delimited by any character. You can add properties in any order.
+          </p>
+          <h5>
+            Example 3:
+          </h5>
+          <p>
+            f=nsl1
+          </p>
+          <p>
+            The property order in this example is stock name(s), stock symbol(s), latest quote of the stock(l1). Notice here that stock name and stock symbol are designated with "n" and "s", not "n0" and "s0". When you designate a property without using a number as the second character, then API will get the property that corresponds to the lowest integer of that letter. For instance, you input "x" into the properties paramater. The API will return the stock exchange of the stock; this is because the API will look for "x0".
+          </p>
+          <h5>
+            Example 4:
+          </h5>
+          <p>
+            f=abb4g3
+          </p>
+          <p>
+            The property order in this example is ask price(a), bid price(b), book value per share(b4), and annualized gain(g3). This shows the property separation more clearly: f=[a][b][b4][g3]. Notice, again that "a" and "b" is interpreted as "a0" and "b0"
+          </p>
+          <p>
+            The <b>third parameter</b> in the GET call is designated as "e". This property is constant. By keeping this property set to ".csv", we are getting a csv formatted string every time we call this API.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module">
+          <h4>Table of Contents</h4>
+          <ol class="list-unstyled">
+            <li><a href="index.html"><b>Section 0</b>: Background information on the Yahoo Stock API</a></li>
+            <li><a href="page1.html"><b>Section 1</b>: Setting Up Your Environment</a></li>
+            <li><a href="page2.html"><b>Section 2</b>: Getting a simple quote from the API</a></li>
+            <li><a href="page3.html"><b>Section 3</b>: Parsing a CSV file</a></li>
+            <li><a href="page4.html"><b>Section 4</b>: An In-depth look at the API URL Address</a></li>
+            <li><a href="page5.html"><b>Section 5</b>: Different Approaches to Calling the API</a></li>
+            <li><a href="page6.html"><b>Section 6</b>: Final thoughts</a></li> 
+          </ol>
+        </div>
+      </div><!-- /.blog-sidebar -->
     </div>
     <nav>
       <ul class="pager">

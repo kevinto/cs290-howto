@@ -2,33 +2,157 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Final Thoughts</title>
+  <title>Alternatives methods of calling the Yahoo API</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/prettify.css" rel="stylesheet">
+  <script src="js/prettify.js"></script>
 </head>
-<body>
+<body onload="prettyPrint()">
   <div class="container">
     <div class="blog-header">
-      <h1 class="blog-title">Section 5: Final thoughts</h1>
+      <h1 class="blog-title">Section 5: Different Approaches to Calling the API</h1>
     </div>
-    <div class="blog-post">
-      <h2 class="blog-post-title">Notes:</h2>
-      <p>
-        Earlier in this How-To guide, we said that a limitation of the Yahoo API was that it could only return stock quotes on specified stocks. A possible workaround can be to get a list of all the stock symbols <a href="http://eoddata.com/symbols.aspx">here</a>. You can parse the webpage for the stock symbols, then use the Yahoo API to get your stock quotes.
-      </p>
-      <p>
-        However, this workaround is not a scalable solution. For a solution that is more efficient, you have to use a paid option. Such as one that can be found <a href="http://eoddata.com/products/webservice.aspx">here</a>. Integrating a paid solution is beyond the scope of this tutorial.
-      </p>
-      <p>
-        Thank you for following along!
-      </p>
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <div class="blog-post">
+          <h2 class="blog-post-title"></h2>
+          <p>
+           There are multiple approaches to integrating this API into your PHP project. I will go through a couple of them with you.  
+          </p>
+          <h4>First Method: Simple and Dirty</h4>
+          <p>
+            You should be familar with this method because it is basically the combination of <a href="page2.html">section 2</a> and <a href="page3.html">section 3</a>. The sample code for that is here: 
+          </p> 
+          <pre class="prettyprint linenums">
+            $filename = "quotes.csv";
+            $downloadFile = file_get_contents("http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&amp;f=nsl1&amp;e=.csv");
+            file_put_contents($filename, $downloadFile);
+
+            $lineNum = 1;
+            if (($handle = fopen("quotes.csv", "r")) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $num = count($data);
+                    echo "&lt;p&gt; $num fields in line $lineNum: &lt;br/&gt;&lt;/p&gt;\n";
+                    $lineNum++;
+                    for ($c=0; $c &lt; $num; $c++) {
+                        echo $data[$c] . "&lt;br/&gt;\n";
+                    }
+                }
+                fclose($handle);
+            }
+          </pre>
+          <p>
+            You can go back to the corresponding sections to get a more detailed analysis of what each line of code does. Taken as a whole, this code accesses the API during the page rendering process and then parses and displays the values received. This method is relatively simple, but it is unmaintainable if your project is bigger than 1 page. The drawbacks of using this method are: </br>
+            <ol>
+              <li>
+                If you need to call the Yahoo API on multiple pages, then you would have to write duplicate code.
+              </li>
+              <li>
+                Requiring the Yahoo API to be accessed during page load makes this a synchronous process. This means that we have to wait for Yahoo to respond before we can load the page.
+              </li>
+            </ol>
+          </p>
+          <h4>Second Method: A better way...</h4>
+          <p>
+            This second method makes the Yahoo API call in an asynchronous manner. This decouples the loading of the page from the Yahoo request. The following are code snippets that should go into three separate files: 
+          </p>
+          <p>The HTML file:</p>
+          <pre class="prettyprint linenums">
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+            &lt;head&gt;
+              &lt;meta charset=&quot;UTF-8&quot;&gt;
+              &lt;title&gt;Gist App&lt;/title&gt;
+              &lt;script src='test.js'&gt;&lt;/script&gt;
+              &lt;link rel=&quot;stylesheet&quot; href=&quot;gistapp.css&quot;&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+              &lt;input type=&quot;submit&quot; value=&quot;call api&quot; onclick=&quot;callYahooAPI();&quot;&gt;
+              &lt;div id=&quot;output&quot;&gt;waiting for action&lt;/div&gt;
+            &lt;/body&gt;
+            &lt;/html&gt;
+          </pre>
+          <p>The Javascript file: test.js</p>
+          <pre class="prettyprint linenums">
+            function callYahooAPI() {
+              var request = new XMLHttpRequest();
+              var url = 'index.php';
+              if (!request){
+                return false;
+              }
+
+              request.onreadystatechange = function(){
+                  if(request.readyState == 4) {
+                    var container = document.getElementById('output');
+                    container.innerHTML = request.responseText;
+                  }
+              }
+
+              request.open('GET', url, true);
+              request.send(null);
+              return request;
+            } 
+          </pre>
+          <p>The PHP file: index.php</p>
+          <pre class="prettyprint linenums">
+            &lt;?php
+            $filename = &quot;quotes.csv&quot;;
+            $downloadFile = file_get_contents(&quot;http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&amp;f=n0sl1&amp;e=.csv&quot;);
+            file_put_contents($filename, $downloadFile);
+
+            $row = 1;
+            if (($handle = fopen(&quot;quotes.csv&quot;, &quot;r&quot;)) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, &quot;,&quot;)) !== FALSE) {
+                    $num = count($data);
+                    echo &quot;&lt;p&gt; $num fields in line $row: &lt;br /&gt;&lt;/p&gt;\n&quot;;
+                    $row++; 
+                    for ($c=0; $c &lt; $num; $c++) {
+                        echo $data[$c] . &quot;&lt;br /&gt;\n&quot;;
+                    }
+                }
+                fclose($handle);
+            }
+            ?&gt;
+          </pre>
+          <p>
+            The reason why we have separate files is because the HTML is for the information structure, Javascript is for the frontend code, and PHP is for backend processing. This gives us good layers for modularity. Using this implementation method, the HTML can finish loading before it makes a request to the Yahoo API.
+          </p>
+          <p>
+            <b>HTML code explanation</b>: This code only outputs a button and a div. The button executes the Javascript function, and the div is a placeholder for the stock information.
+          </p>
+          <p>
+            <b>Javascript code explanation</b>: A single function that makes an asynchronous call to the PHP backend code. Once the Javascript receives information from the backend code it populates our placeholder in the HTML layer. 
+          </p>
+          <p>
+            <b>PHP code explanation</b>: This code is already explained in <a href="page2.html">section 2</a> and <a href="page3.html">section 3</a> of this guide.
+          </p>
+        </div>
+        <nav>
+          <ul class="pager">
+            <li>
+              <a href="page4.html">Previous</a>
+            </li>
+            <li>
+              <a href="page6.html">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module">
+          <h4>Table of Contents</h4>
+          <ol class="list-unstyled">
+            <li><a href="index.html"><b>Section 0</b>: Background information on the Yahoo Stock API</a></li>
+            <li><a href="page1.html"><b>Section 1</b>: Setting Up Your Environment</a></li>
+            <li><a href="page2.html"><b>Section 2</b>: Getting a simple quote from the API</a></li>
+            <li><a href="page3.html"><b>Section 3</b>: Parsing a CSV file</a></li>
+            <li><a href="page4.html"><b>Section 4</b>: An In-depth look at the API URL Address</a></li>
+            <li><a href="page5.html"><b>Section 5</b>: Different Approaches to Calling the API</a></li>
+            <li><a href="page6.html"><b>Section 6</b>: Final thoughts</a></li> 
+          </ol>
+        </div>
+      </div><!-- /.blog-sidebar -->
     </div>
-    <nav>
-      <ul class="pager">
-        <li>
-          <a href="page4.html">Previous</a>
-        </li>
-      </ul>
-    </nav>
   </div>
 </body>
 </html>

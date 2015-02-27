@@ -12,33 +12,51 @@
     <div class="blog-header">
       <h1 class="blog-title">Section 2: Getting a simple quote from the API</h1>
     </div>
-    <div class="blog-post">
-      <h2 class="blog-post-title">Retrieving data through CSV</h2>
-      <h4>Using the GET call to get data from the API</h4>
-      <p>In this step, you will be getting the stock quote for GOOGLE and saving it to a CSV file. The sample PHP code for doing this is below: </p>
-      <pre class="prettyprint linenums">
-        $filename = "quotes.csv";
-        $downloadFile = file_get_contents("http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=nsl1&e=.csv");
-        file_put_contents($filename, $downloadFile);
-      </pre>
-      <p>The code snippit above is getting the stock name, stock symbol, and latest price for GOOGLE. Then it stores it in the "quotes.csv" file. The file_get_contents() method gets the string from the API call. The file_put_contents() method stores the string in the specified file (it will create the file if it does not exist). If we open the "quotes.csv" file in Microsoft Notepad, you will see this:</p>
-      <figure>
-        <img src="pics/csvSample.JPG" alt="quote.csv Picture" />
-        <figcaption>Text in "quotes.csv"</figcaption>
-      </figure>
-      <h4>What is a .csv file?</h4>
-      <p>CSV stands for <a href="http://en.wikipedia.org/wiki/Comma-separated_values">comma-separated values</a>. If you are familar with databases, each line in a CSV file is like a table row and each value within a comma is like a table column. In the picture above, the whole line of text contains information about GOOGLE. The first element is GOOGLE's company name, the second element is GOOGLE's stock symbol, and the last element is GOOGLE's stock price.</p>
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <div class="blog-post">
+          <h2 class="blog-post-title">Retrieving data through CSV</h2>
+          <h4>Using the GET call to get data from the API</h4>
+          <p>In this step, you will be getting the stock quote for GOOGLE and saving it to a CSV file. The sample PHP code for doing this is below: </p>
+          <pre class="prettyprint linenums">
+            $filename = "quotes.csv";
+            $downloadFile = file_get_contents("http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&amp;f=nsl1&amp;e=.csv");
+            file_put_contents($filename, $downloadFile);
+          </pre>
+          <p>The code snippit above is getting the stock name, stock symbol, and latest price for GOOGLE. Then it stores it in the "quotes.csv" file. The file_get_contents() method gets the string from the API call. The file_put_contents() method stores the string in the specified file (it will create the file if it does not exist). If we open the "quotes.csv" file in Microsoft Notepad, you will see this:</p>
+          <figure>
+            <img src="pics/csvSample.JPG" alt="quote.csv Picture" />
+            <figcaption>Text in "quotes.csv"</figcaption>
+          </figure>
+          <h4>What is a .csv file?</h4>
+          <p>CSV stands for <a href="http://en.wikipedia.org/wiki/Comma-separated_values">comma-separated values</a>. If you are familar with databases, each line in a CSV file is like a table row and each value within a comma is like a table column. In the picture above, the whole line of text contains information about GOOGLE. The first element is GOOGLE's company name, the second element is GOOGLE's stock symbol, and the last element is GOOGLE's stock price.</p>
+        </div>
+        <nav>
+          <ul class="pager">
+            <li>
+              <a href="page1.html">Previous</a>
+            </li>
+            <li>
+              <a href="page3.html">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module">
+          <h4>Table of Contents</h4>
+          <ol class="list-unstyled">
+            <li><a href="index.html"><b>Section 0</b>: Background information on the Yahoo Stock API</a></li>
+            <li><a href="page1.html"><b>Section 1</b>: Setting Up Your Environment</a></li>
+            <li><a href="page2.html"><b>Section 2</b>: Getting a simple quote from the API</a></li>
+            <li><a href="page3.html"><b>Section 3</b>: Parsing a CSV file</a></li>
+            <li><a href="page4.html"><b>Section 4</b>: An In-depth look at the API URL Address</a></li>
+            <li><a href="page5.html"><b>Section 5</b>: Different Approaches to Calling the API</a></li>
+            <li><a href="page6.html"><b>Section 6</b>: Final thoughts</a></li> 
+          </ol>
+        </div>
+      </div><!-- /.blog-sidebar -->
     </div>
-    <nav>
-      <ul class="pager">
-        <li>
-          <a href="page1.html">Previous</a>
-        </li>
-        <li>
-          <a href="page3.html">Next</a>
-        </li>
-      </ul>
-    </nav>
   </div>
 </body>
 </html>

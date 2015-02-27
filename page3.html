@@ -12,65 +12,83 @@
     <div class="blog-header">
       <h1 class="blog-title">Section 3: Parsing a CSV file</h1>
     </div>
-    <div class="blog-post">
-      <h2 class="blog-post-title">
-        How to iterate through values of a CSV file
-      </h2>
-      <p>
-        The previous page showed you how to get and save data from the Yahoo API. In this step, you will learn how to iterate through the data contained within a CSV file. The following code sample iterates through each line in the CSV file and prints each field.
-      </p>
-      <pre class="prettyprint linenums">
-        $lineNum = 1;
-        if (($handle = fopen("quotes.csv", "r")) !== FALSE) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-                $num = count($data);
-                echo "&lt;p&gt; $num fields in line $lineNum: &lt;br/&gt;&lt;/p&gt;\n";
-                $lineNum++;
-                for ($c=0; $c &lt; $num; $c++) {
-                    echo $data[$c] . "&lt;br/&gt;\n";
+    <div class="row">
+      <div class="col-sm-8 blog-main">
+        <div class="blog-post">
+          <h2 class="blog-post-title">
+            How to iterate through values of a CSV file
+          </h2>
+          <p>
+            The previous page showed you how to get and save data from the Yahoo API. In this step, you will learn how to iterate through the data contained within a CSV file. The following code sample iterates through each line in the CSV file and prints each field.
+          </p>
+          <pre class="prettyprint linenums">
+            $lineNum = 1;
+            if (($handle = fopen("quotes.csv", "r")) !== FALSE) {
+                while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $num = count($data);
+                    echo "&lt;p&gt; $num fields in line $lineNum: &lt;br/&gt;&lt;/p&gt;\n";
+                    $lineNum++;
+                    for ($c=0; $c &lt; $num; $c++) {
+                        echo $data[$c] . "&lt;br/&gt;\n";
+                    }
                 }
+                fclose($handle);
             }
-            fclose($handle);
-        }
-      </pre>
-      <h4>
-        Going through each line from the sample above:
-      </h4>
-      <p>
-        Line 1: Variable to keep track of which line we are on in the CSV file.</br>
-        Line 2: Opens the "quotes.csv" file in read mode (if it exists).</br>
-        Line 3: While we can still get a line from the CSV file, set the variable $data to an array containing the comma delimited values. Note: There is a 1000 character limit within a line.</br>
-        Line 4: Get the number of elements in the array referenced by $data. Just to be clear, this gets the number of comma delimited values within the current line of the CSV file.</br>
-        Line 5: Outputs the line we are currently on in the CSV file.
-        Line 6: Increment the variable that keeps track of the current line.</br>
-        Line 7: Iterate through all the fields of the current line in the CSV file starting from the first field.</br>
-        Line 8: Output the current field value.</br>
-        Line 11: Closes the file pointer. </br>
-      </p>
-      <h4>
-        This is what the code above outputs:
-      </h4>
-      <figure>
-        <img src="pics/csvPHPoutput.JPG" alt="quote.csv Picture" />
-        <figcaption>Browser Output</figcaption>
-      </figure>
-      <h4>
-        Limitations of CSV files: 
-      </h4>
-      <p>
-        The main limitations of a CSV file is that the data is not self described. This means that the program parsing the CSV file has to know what each field value means. On the other hand, XML and JSON data formats are self described, meaning each field value has a corresponding field type. The usage of the CSV file format is still prevalent because it is so easy to parse. 
-      </p>
+          </pre>
+          <h4>
+            Going through each line from the sample above:
+          </h4>
+          <p>
+            Line 1: Variable to keep track of which line we are on in the CSV file.</br>
+            Line 2: Opens the "quotes.csv" file in read mode (if it exists).</br>
+            Line 3: While we can still get a line from the CSV file, set the variable $data to an array containing the comma delimited values. Note: There is a 1000 character limit within a line.</br>
+            Line 4: Get the number of elements in the array referenced by $data. Just to be clear, this gets the number of comma delimited values within the current line of the CSV file.</br>
+            Line 5: Outputs the line we are currently on in the CSV file.
+            Line 6: Increment the variable that keeps track of the current line.</br>
+            Line 7: Iterate through all the fields of the current line in the CSV file starting from the first field.</br>
+            Line 8: Output the current field value.</br>
+            Line 11: Closes the file pointer. </br>
+          </p>
+          <h4>
+            This is what the code above outputs:
+          </h4>
+          <figure>
+            <img src="pics/csvPHPoutput.JPG" alt="quote.csv Picture" />
+            <figcaption>Browser Output</figcaption>
+          </figure>
+          <h4>
+            Limitations of CSV files: 
+          </h4>
+          <p>
+            The main limitations of a CSV file is that the data is not self described. This means that the program parsing the CSV file has to know what each field value means. On the other hand, XML and JSON data formats are self described, meaning each field value has a corresponding field type. The usage of the CSV file format is still prevalent because it is so easy to parse. 
+          </p>
+        </div>
+        <nav>
+          <ul class="pager">
+            <li>
+              <a href="page2.html">Previous</a>
+            </li>
+            <li>
+              <a href="page4.html">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="sidebar-module">
+          <h4>Table of Contents</h4>
+          <ol class="list-unstyled">
+            <li><a href="index.html"><b>Section 0</b>: Background information on the Yahoo Stock API</a></li>
+            <li><a href="page1.html"><b>Section 1</b>: Setting Up Your Environment</a></li>
+            <li><a href="page2.html"><b>Section 2</b>: Getting a simple quote from the API</a></li>
+            <li><a href="page3.html"><b>Section 3</b>: Parsing a CSV file</a></li>
+            <li><a href="page4.html"><b>Section 4</b>: An In-depth look at the API URL Address</a></li>
+            <li><a href="page5.html"><b>Section 5</b>: Different Approaches to Calling the API</a></li>
+            <li><a href="page6.html"><b>Section 6</b>: Final thoughts</a></li> 
+          </ol>
+        </div>
+      </div><!-- /.blog-sidebar -->
     </div>
-    <nav>
-      <ul class="pager">
-        <li>
-          <a href="page2.html">Previous</a>
-        </li>
-        <li>
-          <a href="page4.html">Next</a>
-        </li>
-      </ul>
-    </nav>
   </div>
 </body>
 </html>
